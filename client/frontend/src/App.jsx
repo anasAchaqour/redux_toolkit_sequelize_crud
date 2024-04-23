@@ -1,28 +1,28 @@
-import Users from "./Users"
-import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import 'bootstrap/dist/css/bootstrap.min.css'
+import Users from './Users'
+import {BrowserRouter, Routes, Route} from 'react-router-dom'
+import CreateUser from './CreateUser'
 import { useEffect } from 'react'
 import axios from 'axios'
 import { useDispatch } from 'react-redux'
-import { getUser } from "./redux/userSlice"
-import CreateUser from "./CreateUser"
-import UpdateUser from "./UpdateUser"
+import { getUser } from './redux/userSlice'
+import UpdateUser from './UpdateUser'
 
 function App() {
 
   const dispatch = useDispatch()
 
-  const fetchUserData = async () => {
-    try {
-      const response = await axios.get('http://localhost:8080/api/users');
-      dispatch(getUser(response.data));
-    } catch (err) {
-      console.log(err)
+  useEffect(()=> {
+    const fetchData = async() => {
+        try {
+            const response = await axios.get('http://localhost:8080/api/users');
+            dispatch(getUser(response.data));
+        } catch(err) {
+            console.log(err)
+        }
     }
-  }
-
-  useEffect(() => {
-    fetchUserData();
-  }, [])
+    fetchData();
+}, [])
 
 
   return (
@@ -33,7 +33,6 @@ function App() {
         <Route path='/edit/:id' element={<UpdateUser />}></Route>
       </Routes>
     </BrowserRouter>
-
   )
 }
 
