@@ -27,7 +27,12 @@ function App() {
 
   return (
     <BrowserRouter>
+    <div className='d-flex  justify-content-center align-items-center'>
+      <h1 >SIMPLE CRUD APP WITH EXPRESS AND REDUX TOOLKIT</h1>
+    </div>
+    
       <Routes>
+        
         <Route path='/' element={<Users />}></Route>
         <Route path='/create' element={<CreateUser />}></Route>
         <Route path='/edit/:id' element={<UpdateUser />}></Route>
